@@ -1,0 +1,71 @@
+# ============================================================
+# QQ AI 聊天搭子 · 配置模板
+# ============================================================
+# 使用方法：
+#   1. 复制本文件为 config.yaml
+#   2. 填入自己的值
+#   3. config.yaml 已在 .gitignore 中，不会被提交
+#
+# 注意：实际配置请在 AstrBot WebUI 中完成，本文件作为
+#       参数参考与团队协作时的配置留档。
+# ============================================================
+
+# ---------------- 模型 ----------------
+provider:
+  # DeepSeek 使用 OpenAI 兼容接口
+  type: openai_compatible
+  api_base: https://api.deepseek.com
+  # ⚠️ 不要提交真实 Key，config.yaml 已被忽略
+  api_key: "sk-REPLACE_ME"
+  model: deepseek-chat
+  # 聊天场景温度高一点更有随机性，但别太高
+  temperature: 0.9
+  max_tokens: 200
+
+# ---------------- 平台接入 ----------------
+platform:
+  type: onebot_v11
+  id: qq-main
+  # AstrBot 作为服务端，协议端主动连过来（反向 WebSocket）
+  reverse_ws_host: 0.0.0.0
+  reverse_ws_port: 6199
+  # 与协议端保持一致；留空表示不校验
+  token: ""
+
+# ---------------- 人设 ----------------
+persona:
+  file: persona.md
+  # 上下文轮数，越大越贵越慢，群聊 10~15 够用
+  max_context_turns: 12
+
+# ---------------- 回复策略 ----------------
+reply:
+  # 触发方式：at（被 @）/ keyword（关键词）/ random（随机插话）
+  trigger: ["at", "keyword"]
+  keywords: ["阿搭", "搭子"]
+
+  # 随机参与概率，0~1。设太高会像刷屏机器人
+  random_rate: 0.15
+
+  # 随机延迟区间（秒）。秒回不像真人
+  delay_seconds: [2, 8]
+
+  # 同一会话冷却（秒）
+  cooldown_seconds: 30
+
+  # 每小时回复上限，全局保险丝
+  max_replies_per_hour: 40
+
+  # 长回复拆成多条发送，模仿打字节奏
+  split_long_reply: true
+
+# ---------------- 内容安全 ----------------
+safety:
+  # 命中即忽略，不回复也不报错
+  blocklist:
+    - "政治"
+    - "赌博"
+    - "贷款"
+    - "代购"
+    - "加微信"
+  block_action: "ignore"

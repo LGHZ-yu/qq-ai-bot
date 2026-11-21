@@ -1,0 +1,35 @@
+# ---- 真实配置与密钥（绝不提交）----
+config.yaml
+.env
+.env.*
+*.local.yaml
+secrets/
+*.key
+*.pem
+
+# ---- AstrBot / 协议端运行时数据 ----
+data/
+logs/
+*.log
+*.db
+*.sqlite3
+*.session
+sessions/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ---- Node ----
+node_modules/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
